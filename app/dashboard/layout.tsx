@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
-import "./globals.css";
+import "./style/body.css"
 
 import { cn } from "@/lib/utils";
+import Sidebar from "@/components/Sidebar";
 
 const fontSans = FontSans({
    subsets: ["latin"],
@@ -10,7 +11,7 @@ const fontSans = FontSans({
   });
 
 export const metadata: Metadata = {
-  title: "Piper School",
+  title: "Dashboard | Piper School",
   description: "Manage your school with ease.",
 };
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(fontSans.className)}>
+        <Sidebar />
         {children}
       </body>
     </html>

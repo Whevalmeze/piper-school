@@ -20,6 +20,19 @@ const config = {
     },
     extend: {
       colors: {
+          'arapawa': {
+            '50': '#f2f3ff',
+            '100': '#e8ecff',
+            '200': '#d4daff',
+            '300': '#b2bcff',
+            '400': '#8690ff',
+            '500': '#555afd',
+            '600': '#3932f5',
+            '700': '#2b20e1',
+            '800': '#231abd',
+            '900': '#1f179b',
+            '950': '#0e0c68',
+        },  
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

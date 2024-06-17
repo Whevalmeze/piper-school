@@ -1,8 +1,15 @@
+import Footer from "@/components/Footer"
+import Hero from "@/components/Hero"
+import SignInNav from "@/components/SignInNav"
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="font-sans">
-      Piper School
+    <main className="min-h-full flex flex-col">
+        <SignInNav />
+        <Hero />
+        <Footer />
     </main>
-  );
+    )
 }
+
+export default Home
