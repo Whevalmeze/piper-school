@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import authRouter from "./auth/auth.routes";
 import userRouter from "./users/users.routes";
+import institutionRouter from "./institutions/institutions.routes";
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.get("/", (req, res) => {
 // ENDPOINT
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+app.use("/institutions", institutionRouter);
 
 export default app;
