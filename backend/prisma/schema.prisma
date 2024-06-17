@@ -1,0 +1,200 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  password String
+  role     UserRole @default(BASIC)
+
+  institutions Institution[] //school
+  staffs       Staff[]
+  students     Student[]
+}
+
+model Institution {
+  id       String    @id @default(cuid())
+  name     String
+  address  String
+  staffs   Staff[]
+  students Student[]
+  courses  Course[]
+  User     User      @relation(fields: [userId], references: [id])
+  userId   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Staff {
+  id    String @id @default(cuid())
+  name  String
+  email String @unique
+
+  courses   Course[]
+  staffRole StaffRole @default(ACADEMIC)
+
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  User          User        @relation(fields: [userId], references: [id])
+  userId        String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Student {
+  id                String             @id @default(cuid())
+  name              String
+  email             String             @unique
+  institutionId     String
+  institution       Institution        @relation(fields: [institutionId], references: [id])
+  User              User               @relation(fields: [userId], references: [id])
+  userId            String
+  courseEnrollments CourseEnrollment[]
+  Quiz              Quiz[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+model Course {
+  id                String             @id @default(cuid())
+  title             String
+  subject           String
+  institutionId     String
+  institution       Institution        @relation(fields: [institutionId], references: [id])
+  staffId           String
+  staff             Staff              @relation(fields: [staffId], references: [id])
+  courseEnrollments CourseEnrollment[]
+  units             Unit[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// JOin table for courses and students
+model CourseEnrollment {
+  id        String   @id @default(cuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id])
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  role      UserRole
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, courseId])
+}
+
+// Course generation 
+
+// unit contains many chapters
+model Unit {
+  id       String @id @default(cuid())
+  courseId String
+
+  name     String
+  courses  Course    @relation(fields: [courseId], references: [id])
+  chapters Chapter[]
+
+  @@index([courseId])
+}
+
+model Chapter {
+  id     String @id @default(cuid())
+  unitId String
+
+  name               String
+  youtubeSearchQuery String
+  videoId            String?
+  summary            String?          @db.VarChar(5000)
+  unit               Unit             @relation(fields: [unitId], references: [id])
+  courseQuestions    CourseQuestion[]
+
+  @@index([unitId], name: "unitId")
+}
+
+model CourseQuestion {
+  id        String @id @default(cuid())
+  chapterId String
+
+  courseQuestion String  @db.VarChar(5000)
+  answer         String  @db.VarChar(5000)
+  options        String  @db.VarChar(5000)
+  chapter        Chapter @relation(fields: [chapterId], references: [id])
+
+  @@index([chapterId])
+}
+
+// Quiz part 
+
+model Quiz {
+  id          String     @id @default(cuid())
+  questions   Question[]
+  timeStarted DateTime
+  topic       String
+  timeEnded   DateTime?
+  quizType    QuizType
+  studentId   String
+  student     Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model TopicCount {
+  id    String @id @default(cuid())
+  topic String @unique
+  count Int
+}
+
+model Question {
+  id                String   @id @default(cuid())
+  question          String
+  answer            String
+  quizId            String
+  options           Json? // for mcq questions
+  percentageCorrect Float? // for open_ended questions
+  isCorrect         Boolean? // for mcq questions
+  questionType      QuizType
+  userAnswer        String?
+
+  quiz Quiz @relation(fields: [quizId], references: [id])
+
+  @@index([quizId])
+}
+
+enum QuizType {
+  MCQ
+  OPEN_ENDED
+}
+
+// Enums
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  BASIC
+}
+
+enum CourseRDENTole {
+  STUDENT
+  TEACHER
+}
+enum StaffRole {
+  OWNER
+  ADMIN
+  MODERATORS
+  ACADEMIC
+  NON_ACADEMIC
+}
