@@ -1,6 +1,32 @@
 import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import prisma from "../prismaClient";
+import { IUserRequest } from "../utils/authenticate";
+
+const createInstitution = asyncHandler(async (req: Request, res: Response) => {
+  try {
+    // const userId = req.user?.id;
+    // console.log("hello", userId);
+    const { name, address, userId } = req.body;
+    if (!userId || !name) {
+      res.status(400).json({ message: "Name, or userId are required" });
+      return;
+    }
+
+    const newInstitution = await prisma.institution.create({
+      data: {
+        name,
+        address,
+        userId,
+      },
+    });
+
+    res.status(201).json(newInstitution);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to create institution" });
+  }
+});
 
 const getAllInstitutions = asyncHandler(async (req: Request, res: Response) => {
   try {
@@ -28,4 +54,4 @@ const getInstitutionById = asyncHandler(async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to fetch institution" });
   }
 });
-export { getAllInstitutions, getInstitutionById };
+export { createInstitution, getAllInstitutions, getInstitutionById };
