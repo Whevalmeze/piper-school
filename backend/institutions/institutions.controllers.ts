@@ -54,4 +54,35 @@ const getInstitutionById = asyncHandler(async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to fetch institution" });
   }
 });
-export { createInstitution, getAllInstitutions, getInstitutionById };
+
+const deleteInstitutionById = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const institution = await prisma.institution.findUnique({
+        where: { id },
+      });
+
+      if (!institution) {
+        res.status(404).json({ message: "Institution not found" });
+        return;
+      }
+
+      await prisma.institution.delete({
+        where: { id },
+      });
+
+      res.status(200).json({ message: "Institution deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Failed to delete institution" });
+    }
+  }
+);
+export {
+  createInstitution,
+  getAllInstitutions,
+  getInstitutionById,
+  deleteInstitutionById,
+};
