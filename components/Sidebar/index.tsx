@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 import ActiveLink from '../ActiveLink'
+import Link from 'next/link'
 
-const links: Array<string> = ["Dashboard", "Users", "Academic", "Financial", "Communication"]
+const links: Array<string> = ["dashboard", "users", "academic", "financial", "communication"]
 
 const Sidebar = () : ReactNode => {
   return (
@@ -12,7 +13,7 @@ const Sidebar = () : ReactNode => {
             {
                 links.map((link: string, index: number): ReactNode => {
                    return <li key={index}>
-                            <div className='px-6 py-4 rounded-lg bg-arapawa-500'>{link}</div>
+                            <div className='px-6 py-4 rounded-lg bg-arapawa-500'><Link className='capitalize' href={link}>{link}</Link></div>
                         </li>
                 })
             }
