@@ -73,10 +73,56 @@ const deleteInstitutionById = asyncHandler(
         where: { id },
       });
 
-      res.status(200).json({ message: "Institution deleted successfully" });
+      res.status(204).json({ message: "Institution deleted successfully" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Failed to delete institution" });
+    }
+  }
+);
+
+const updateInstitutionById = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { name, address, userId } = req.body;
+    // const userId = req.user?.id;
+
+    try {
+      const institution = await prisma.institution.findUnique({
+        where: { id },
+      });
+
+      if (!institution) {
+        res.status(404).json({ message: "Institution not found" });
+        return;
+      }
+
+      const data: { name?: string; address?: string; userId?: string } = {};
+
+      if (name) {
+        data.name = name;
+      }
+
+      if (address) {
+        data.address = address;
+      }
+
+      if (userId) {
+        data.userId = userId;
+      }
+
+      const updatedInstitution = await prisma.institution.update({
+        where: { id },
+        data,
+      });
+
+      res.status(200).json({
+        message: "Institution updated successfully",
+        updatedInstitution,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Failed to update institution" });
     }
   }
 );
@@ -85,4 +131,5 @@ export {
   getAllInstitutions,
   getInstitutionById,
   deleteInstitutionById,
+  updateInstitutionById,
 };

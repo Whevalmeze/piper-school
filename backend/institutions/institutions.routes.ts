@@ -4,6 +4,7 @@ import {
   getInstitutionById,
   createInstitution,
   deleteInstitutionById,
+  updateInstitutionById,
 } from "./institutions.controllers";
 // import authenticateUser from "../utils/authenticate";
 
@@ -13,5 +14,6 @@ institutionRouter.post("/", createInstitution);
 institutionRouter.get("/", getAllInstitutions);
 institutionRouter.get("/:id", getInstitutionById);
 institutionRouter.delete("/:id", deleteInstitutionById);
+institutionRouter.patch("/:id", updateInstitutionById);
 
 export default institutionRouter;
