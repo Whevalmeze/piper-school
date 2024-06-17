@@ -55,41 +55,42 @@ model Staff {
 }
 
 model Student {
-  id            String       @id @default(cuid())
-  name          String
-  email         String       @unique
-  institutionId String
-  institution   Institution  @relation(fields: [institutionId], references: [id])
-  User          User         @relation(fields: [userId], references: [id])
-  userId        String
-  enrollments   Enrollment[]
-  Quiz          Quiz[]
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id                String             @id @default(cuid())
+  name              String
+  email             String             @unique
+  institutionId     String
+  institution       Institution        @relation(fields: [institutionId], references: [id])
+  User              User               @relation(fields: [userId], references: [id])
+  userId            String
+  courseEnrollments CourseEnrollment[]
+  Quiz              Quiz[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model Course {
-  id            String       @id @default(cuid())
-  title         String
-  subject       String
-  institutionId String
-  institution   Institution  @relation(fields: [institutionId], references: [id])
-  staffId       String
-  staff         Staff        @relation(fields: [staffId], references: [id])
-  enrollments   Enrollment[]
-  units         Unit[]
+  id                String             @id @default(cuid())
+  title             String
+  subject           String
+  institutionId     String
+  institution       Institution        @relation(fields: [institutionId], references: [id])
+  staffId           String
+  staff             Staff              @relation(fields: [staffId], references: [id])
+  courseEnrollments CourseEnrollment[]
+  units             Unit[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 // JOin table for courses and students
-model Enrollment {
-  id        String  @id @default(cuid())
+model CourseEnrollment {
+  id        String   @id @default(cuid())
   studentId String
-  student   Student @relation(fields: [studentId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
   courseId  String
-  course    Course  @relation(fields: [courseId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+  role      UserRole
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -186,6 +187,10 @@ enum UserRole {
   BASIC
 }
 
+enum CourseRDENTole {
+  STUDENT
+  TEACHER
+}
 enum StaffRole {
   OWNER
   ADMIN
