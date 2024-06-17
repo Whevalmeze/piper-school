@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import authRouter from "./auth/auth.routes";
+import userRouter from "./users/users.routes";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.get("/", (req, res) => {
 
 // ENDPOINT
 app.use("/auth", authRouter);
+app.use("/users", userRouter);
 
 export default app;
