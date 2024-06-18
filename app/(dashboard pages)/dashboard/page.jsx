@@ -1,8 +1,10 @@
-import React from 'react'
+import DashboardProfile from '@/components/DashboardProfile'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <main>
+      <DashboardProfile />
+    </main>
   )
 }
 

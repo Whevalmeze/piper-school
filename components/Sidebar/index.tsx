@@ -1,7 +1,9 @@
 import React, { ReactNode } from 'react'
 import ActiveLink from '../ActiveLink'
+import { BookOpenText, CircleGauge, LogOut, Network, Settings, Users, Wallet } from 'lucide-react'
 
 const links: Array<string> = ["dashboard", "users", "academic", "financial", "communication"]
+const icons: Array<ReactNode> = [<CircleGauge  />, <Users />, <BookOpenText />,<Wallet />, <Network />]
 
 const Sidebar = () : ReactNode => {
   return (
@@ -12,15 +14,15 @@ const Sidebar = () : ReactNode => {
                 {
                     links.map((link: string, index: number): ReactNode => {
                        return <li key={index}>
-                                <ActiveLink link={link} />
+                                <ActiveLink link={link} icon={icons[index]} />
                             </li>
                     })
                 }
             </ul>
         </div>
             <ul className="px-10 capitalize py-3 text-gray-300 gap-1 flex flex-col ">
-                <li>Settings</li>
-                <li>Logout</li>
+                <li className='flex gap-2'><Settings /> Settings</li>
+                <li className='flex gap-2'><LogOut />Logout</li>
             </ul>
     </div>
     )
