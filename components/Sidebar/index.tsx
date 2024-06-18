@@ -3,7 +3,7 @@ import ActiveLink from '../ActiveLink'
 import { BookOpenText, CircleGauge, LogOut, Network, Settings, Users, Wallet } from 'lucide-react'
 
 const links: Array<string> = ["dashboard", "users", "academic", "financial", "communication"]
-const icons: Array<ReactNode> = [<CircleGauge  />, <Users />, <BookOpenText />,<Wallet />, <Network />]
+const icons: Array<ReactNode> = [<CircleGauge size={16} />, <Users size={16} />, <BookOpenText size={16} />,<Wallet size={16} />, <Network size={16} />]
 
 const Sidebar = () : ReactNode => {
   return (
@@ -21,8 +21,8 @@ const Sidebar = () : ReactNode => {
             </ul>
         </div>
             <ul className="px-10 capitalize py-3 text-gray-300 gap-1 flex flex-col ">
-                <li className='flex gap-2'><Settings /> Settings</li>
-                <li className='flex gap-2'><LogOut />Logout</li>
+                <li className='flex gap-2 items-center'><Settings size={16}/> Settings</li>
+                <li className='flex gap-2 items-center'><LogOut size={16}/>Logout</li>
             </ul>
     </div>
     )
