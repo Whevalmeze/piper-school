@@ -1,17 +1,21 @@
 import DashboardProfile from '@/components/DashboardProfile'
 import Overview from '@/components/Overview'
+import { RegistrationTable } from '@/components/RegistrationTable'
 import TeacherProfile from '@/components/TeacherProfile'
 
 const Dashboard = () => {
   return (
-    <main className='p-6 w-full flex flex-col gap-3 container min-h-full'>
+    <>
       <DashboardProfile user={{firstname: "Ade", lastname: "Emmenauel"}} />
-      <div className='flex justify-between'>
+      <div className='flex gap-3 justify-between'>
         <Overview />
         <TeacherProfile />
       </div>
-    </main>
+      <div className='border border-arapawa-200 rounded-lg'>
+        <RegistrationTable className="border border-arapawa-100"/>
+      </div>
+    </>
   )
 }
 
-export default Dashboard
+export default Dashboard;

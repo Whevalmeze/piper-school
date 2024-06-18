@@ -7,7 +7,7 @@ const icons: Array<ReactNode> = [<CircleGauge size={16} />, <Users size={16} />,
 
 const Sidebar = () : ReactNode => {
   return (
-    <div className='bg-arapawa-950 flex flex-col justify-between h-full min-h-screen min-w-[20%] text-white py-5 px-2'>
+    <div className='bg-arapawa-800 flex flex-col justify-between h-full min-h-screen min-w-[20%] text-white py-5 px-2'>
         <div className="">
         <div className='text-4xl font-bold p-2 mb-20 tracking-tight'>Piper School</div>
             <ul className='flex flex-col gap-1'>

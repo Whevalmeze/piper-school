@@ -1,5 +1,6 @@
 import { Contact, User, Users } from 'lucide-react'
 import React, { ReactNode } from 'react'
+import { DatePickerWithRange } from '../ui/datepicker'
 
 type Props = {}
 type CardProps = {
@@ -29,8 +30,8 @@ const data: data = [
 
 const Card = ({value, icon, title}: CardProps) => {
   return (
-    <div className='flex p-6 w-fit shadow-md rounded-2xl items-center justify-center flex-col'>
-        <div className='flex gap-2 p-3'>
+    <div className='flex p-6 min-w-fit border border-arapawa-100  rounded-lg items-center justify-center flex-col'>
+        <div className='flex items-center gap-1 p-3'>
             {icon}
             <span className='text-2xl font-semibold'>{value}</span>
         </div>
@@ -41,9 +42,10 @@ const Card = ({value, icon, title}: CardProps) => {
 
 const Overview = (props: Props) => {
   return (
-    <div className='bg-wgite shadow-md rounded-2xl p-3'>
+    <div className='bg-white flex flex-col gap-5 min-w-fit border border-arapawa-100  rounded-lg p-3'>
         <div className='w-full flex justify-between'>
-            <h3 className='text-2xl font-semibold'>Overview</h3>
+            <h3 className='text-xl font-semibold'>Overview</h3>
+            <DatePickerWithRange />
         </div>
         <div className='flex gap-5'>
             {
