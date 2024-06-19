@@ -18,31 +18,31 @@ import {
   const invoices: Array<InvoiceType> = [
     {
       invoice: "INV001",
-      name: "Mr. Joseph Archibong",
+      name: "Ejugwu Clement",
       entranceClass: "JSS 1",
       sex: "Male",
     },
     {
       invoice: "INV002",
-      name: "Mr. Joseph Archibong",
+      name: "Ade-emmanuel Praise",
       entranceClass: "JSS 2",
       sex: "Female",
     },
     {
       invoice: "INV003",
-      name: "Mr. Joseph Archibong",
+      name: "Ubaka John",
       entranceClass: "SSS 1",
       sex: "Male",
     },
     {
       invoice: "INV004",
-      name: "Mr. Joseph Archibong",
+      name: "Arolowo Grace",
       entranceClass: "SSS 3",
       sex: "Female",
     },
     {
       invoice: "INV005",
-      name: "Mr. Joseph Archibong",
+      name: "Oyebola Deborah",
       entranceClass: "SSS 3",
       sex: "Female",
     },
@@ -67,7 +67,7 @@ import {
             </TableRow>
           ))}
         </TableBody>
-        <TableCaption className="text-red-500 hover:underline mt-1 text-center cursor-pointer pb-3">View all recent registrations</TableCaption>
+        <TableCaption className="border-t text-red-500 hover:underline text-center mt-0 cursor-pointer py-3">View all recent registrations</TableCaption>
       </Table>
     )
   }
