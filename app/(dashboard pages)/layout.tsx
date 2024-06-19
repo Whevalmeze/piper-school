@@ -12,7 +12,7 @@ export default function RootLayout({
     <>
       <Sidebar />
       <main className='w-full max-h-screen h-screen overflow-y-hidden min-h-full'>
-        <section className="overflow-y-scroll p-6 w-full flex flex-col gap-3 container min-h-full">{children}</section>
+        <section className="overflow-y-scroll h-screen p-6 w-full flex flex-col gap-3 container min-h-full">{children}</section>
       </main>
     </>
   );
