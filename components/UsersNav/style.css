@@ -1,0 +1,9 @@
+.usernav{
+    display: flex;
+    gap: "40px";
+}
+.usernav__link {
+    text-decoration: none;
+    padding: 16px;
+    padding-left: 0;
+}
