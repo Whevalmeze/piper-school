@@ -17,7 +17,12 @@ const Sidebar = () : ReactNode => {
                 {
                     links.map((link: string, index: number): ReactNode => {
                        return <li key={index}>
-                                <ActiveLink link={link} icon={icons[index]} />
+                                <ActiveLink startsWith={true} link={`/${link}`} default="px-10 flex items-center gap-2 text-gray-300 capitalize py-3 rounded-xl" active="bg-arapawa-500">
+                                    <>
+                                        {icons[index]}
+                                        {link}
+                                    </>
+                                </ActiveLink>
                             </li>
                     })
                 }

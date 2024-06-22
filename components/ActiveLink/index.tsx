@@ -3,17 +3,23 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 
-const ActiveLink = (props: { link: string, icon: ReactNode }) => {
+type Props = {
+    link: string,
+    default: string,
+    active: string,
+    icon?: ReactNode,
+    startsWith?: boolean,
+    children: ReactNode,
+}
+
+const ActiveLink = (props: Props) => {
     const pathname = usePathname()
     
-    const isActive = pathname === `/${props.link}` || pathname.startsWith(`/${props.link}/`);
+    const isActive = !props.startsWith ? pathname === `${props.link}` : pathname.startsWith(`${props.link}/`) || pathname === `${props.link}`;
 
     return (
-        <Link href={`/${props.link}`}>
-            <div className={`px-10 flex items-center gap-2 text-gray-300 capitalize py-3 rounded-xl ${isActive ? "bg-arapawa-500" : ""}`}>
-                {props.icon}
-                {props.link}
-            </div>
+        <Link className={`${props.default}  ${isActive ? props.active : ""}`} href={`${props.link}`}>
+            {props.children}
         </Link>
     )
 }
