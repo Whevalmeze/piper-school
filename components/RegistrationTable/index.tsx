@@ -53,7 +53,7 @@ import {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="">Student's Name</TableHead>
+            <TableHead className="">Student&apos;s Name</TableHead>
             <TableHead className="text-left">Class</TableHead>
             <TableHead className="text-left">Gender</TableHead>
           </TableRow>

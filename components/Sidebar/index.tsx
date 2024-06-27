@@ -5,7 +5,7 @@ import ActiveLink from '../ActiveLink'
 import { BookOpenText, ChevronLeft, ChevronRight, CircleGauge, LogOut, Network, Settings, Users, Wallet } from 'lucide-react'
 
 const links: Array<string> = ["dashboard", "users", "academic", "financial", "communication"]
-const icons: Array<ReactNode> = [<CircleGauge size={16} />, <Users size={16} />, <BookOpenText size={16} />, <Wallet size={16} />, <Network size={16} />]
+const icons: Array<ReactNode> = [<CircleGauge key={"gayd"} size={16} />, <Users key={"gayds"} size={16} />, <BookOpenText key={"gaydd"} size={16} />, <Wallet key={"gasyd"} size={16} />, <Network key={"gaysd"} size={16} />]
 
 const Sidebar = (): ReactNode => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
