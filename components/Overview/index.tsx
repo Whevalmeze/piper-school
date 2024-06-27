@@ -45,9 +45,9 @@ const Overview = (props: Props) => {
     <div className='bg-white flex flex-col gap-5 min-w-fit border border-arapawa-100  rounded-lg p-3'>
         <div className='w-full flex justify-between'>
             <h3 className='text-xl font-semibold'>Overview</h3>
-            <DatePickerWithRange />
+            <DatePickerWithRange className='hidden lg:block' />
         </div>
-        <div className='flex gap-5'>
+        <div className='flex gap-5 flex-wrap justify-center'>
             {
                 data.map(({title, value, icon}: CardProps) =>
                     <Card key={title} title={title} value={value} icon={icon} />    

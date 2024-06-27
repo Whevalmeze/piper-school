@@ -8,7 +8,7 @@ const Dashboard = () => {
   return (
     <>
       <DashboardProfile user={{firstname: "Ade", lastname: "Emmenauel"}} />
-      <div className='flex gap-3 justify-between'>
+      <div className='flex flex-col lg:flex-row gap-3 justify-between'>
         <Overview />
         <TeacherProfile />
       </div>

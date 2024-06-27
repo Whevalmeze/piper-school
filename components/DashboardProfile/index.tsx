@@ -15,7 +15,7 @@ type Props = {
 
 const DashboardProfile = ({user}: Props) => {
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex flex-col lg:flex-row justify-between w-full">
         <div>
           <p className="text-xl">Hi, {user?.firstname}.</p>
           <h2 className="text-2xl font-bold">Welcome back, Admin.</h2>
